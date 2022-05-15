@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(CounterApp());
+}
+
+class CounterApp extends StatefulWidget {
+  @override
+  _CounterAppState createState() => _CounterAppState();
+}
+
+class _CounterAppState extends State<CounterApp> {
+  int Team_A_Score = 0 ;
+  
+  addpoint(String chosenTeam,int value)
+  {
+    setState(() {
+      if(chosenTeam == 'A')
+      {
+          if(Team_A_Score == 10){
+              Team_A_Score = Team_A_Score;
+          }
+          else {
+              Team_A_Score += value ;
+          }       
+      }
+      if(chosenTeam == 'B')
+      {
+          if(Team_A_Score == 0){
+              Team_A_Score = Team_A_Score;
+          }
+          else {
+              Team_A_Score -= value ;
+          }       
+      }
+    }
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color(0xFF33ffd6),
+          title: Text(
+            "Counter",
+          ),
+        ),
+        body: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        " button",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                      ),
+                      Text(
+                        Team_A_Score.toString(),
+                        style: TextStyle(
+                          fontSize: 70,
+                        ),
+                      ),
+                      RaisedButton(
+                        onPressed: (){
+                          addpoint("A", 1);
+                        },
+                        color: Color(0xFF33ffd6),
+                        child: Text(
+                          "Add 1 ",
+                        ),
+                        
+                      ),
+                    
+                    RaisedButton(
+                        onPressed: (){
+                          addpoint("B", 1);
+                        },
+                        color: Color(0xFF33ffd6),
+                        child: Text(
+                          "Add -1",
+                        ),
+                      ), 
+                    ],
+                  ),
+                  
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 140,
+              left: 120,
+              right: 120,
+              child: RaisedButton(
+                onPressed: (){
+                  setState(() {
+                    Team_A_Score = 0;
+                  });
+                },
+                color: Color(0xFF33ffd6),
+                child: Text("Reset"),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
